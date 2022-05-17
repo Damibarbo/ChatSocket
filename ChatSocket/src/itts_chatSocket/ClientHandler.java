@@ -66,7 +66,7 @@ public class ClientHandler implements Runnable{
 				try {
 					for (ClientHandler ch: clientHandlers) {
 						if(!ch.username.equals(username)) {
-							ch.bw.write(s+"\n");
+							ch.bw.write(s);
 							ch.bw.newLine();
 							ch.bw.flush();
 						}

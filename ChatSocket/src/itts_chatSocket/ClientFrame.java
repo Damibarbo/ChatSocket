@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -26,11 +27,14 @@ public class ClientFrame extends JFrame  {
 		setLayout(new BorderLayout()); 
 				
 		chat=new TextAreaPanel(); 
+		chat.setAutoscrolls(true);
+		JScrollPane jp = new JScrollPane(chat);
+		jp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		bs = new BarraStrumentiClient(nu);
 		bs.setTextAreaPanel(chat);
-		chat.setAutoscrolls(true);
 		
-		add(chat,BorderLayout.CENTER);
+		add(jp,BorderLayout.CENTER);
 		add(bs,BorderLayout.PAGE_END); 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

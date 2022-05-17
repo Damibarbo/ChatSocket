@@ -1,9 +1,12 @@
 package itts_chatSocket;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -16,7 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class BarraStrumentiClient extends JPanel implements ActionListener {
+public class BarraStrumentiClient extends JPanel implements ActionListener,KeyListener {
 	
 	private JButton btnInvio; 
 	private JTextField mess; 
@@ -64,12 +67,11 @@ public class BarraStrumentiClient extends JPanel implements ActionListener {
 
 			@Override
 			public void run() {
-				
 				String msg;
 				while(s.isConnected()) {
 					try {
-						msg = bf.readLine();
-						tap.appendiTesto(msg + "\n");
+						msg = bf.readLine() + "\n";
+						tap.appendiTesto(msg);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -90,19 +92,37 @@ public class BarraStrumentiClient extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
         try {
-        	m = mess.getText() + "\n";
-    		tap.appendiTesto(m + "\n");
+        	m = mess.getText();
+    		tap.appendiTesto(m+"\n");
 			bw.write(username + " : " + m);
 			bw.newLine();
 	        bw.flush();
+	        mess.setText("");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
         
 		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		tap.appendiTesto("hai premuto sorbone");
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		tap.appendiTesto("hai premuto sorbone");
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		tap.appendiTesto("hai premuto sorbone");
 	} 
 
 }
